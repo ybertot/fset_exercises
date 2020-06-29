@@ -78,15 +78,6 @@ Lemma mem_cons (x a : Z) (s : set) :
   mem x (a :: s) = Z.eqb x a || mem x s.
 Proof. intros; simpl; reflexivity. Qed.
 
-(*
-Lemma mem_In : forall (x : Z) (s : set), mem x s = true <-> In x s.
-Proof.
-intros x s; unfold mem; rewrite existsb_exists.
-split; [intros [y [HIn Hxy]]; apply Z.eqb_eq in Hxy; rewrite Hxy; auto|].
-intro HIn; exists x; split; [auto|apply Z.eqb_refl].
-Qed.
-*)
-
 Lemma mem_app (x : Z) (s1 s2 : set) :
   mem x (s1 ++ s2) = mem x s1 || mem x s2.
 Proof. intros; unfold mem; rewrite existsb_app; reflexivity. Qed.
@@ -126,7 +117,8 @@ Qed.
 
 Time Compute cardinal (inter nums nums2).
 
-Compute cardinal (union nums nums2).
+Time Compute cardinal (union nums nums2).
+
 Compute cardinal (substract nums nums2).
 
 Definition select (test : Z -> bool) (s : set) := filter test s.
